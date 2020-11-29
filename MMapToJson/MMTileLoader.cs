@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace MMapToJson
@@ -8,9 +10,15 @@ namespace MMapToJson
     {
         public static MMTile LoadMMTile(string path)
         {
-            var tile = new MMTile();
+            var data = File.ReadAllBytes(path);
 
-            return tile;
+            unsafe
+            {
+                fixed (byte* dataPtr = data)
+                {
+                    return (MMTile)Marshal.PtrToStructure((IntPtr)dataPtr, typeof(MMTile));
+                }
+            }
         }
     }
 }

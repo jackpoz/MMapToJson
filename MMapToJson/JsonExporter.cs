@@ -43,7 +43,12 @@ namespace MMapToJson
         public void Export()
         {
             var tile = MMTileLoader.LoadMMTile(SourcePath);
-            var json = JsonSerializer.Serialize(tile);
+            var json = JsonSerializer.Serialize(tile, new JsonSerializerOptions
+            {
+                IncludeFields = true,
+                WriteIndented = true,
+                MaxDepth = int.MaxValue
+            });
             File.WriteAllText(DestinationPath, json);
         }
     }
