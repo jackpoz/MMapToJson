@@ -12,7 +12,8 @@ namespace MMapToJson
     {
         public MmapTileHeader MmapTileHeader;
         public dtMeshHeader dtMeshHeader;
-    }
+		public dtMeshTile dtMeshTile;
+	}
 
     unsafe struct MmapTileHeader
     {
@@ -20,7 +21,7 @@ namespace MMapToJson
         public uint32 dtVersion;
         public uint32 mmapVersion;
         public uint32 size;
-        public char usesLiquids;
+        public byte usesLiquids;
         fixed char padding[3];
     }
 
@@ -47,6 +48,25 @@ namespace MMapToJson
 		public XYZ bmin;
 		public XYZ bmax;
 		public float bvQuantFactor;
+	};
+
+	unsafe struct dtMeshTile
+	{
+		public uint salt;
+		public uint linksFreeList;
+		//public dtMeshHeader header;
+		//public dtPoly[] polys;
+		public float[] verts;
+		//public dtLink[] links;
+		//public dtPolyDetail* detailMeshes;
+		public float[] detailVerts;
+		public byte[] detailTris;
+		//public dtBVNode* bvTree;
+		//public dtOffMeshConnection* offMeshCons;
+		public byte[] data;
+		public int dataSize;
+		public int flags;
+		//public dtMeshTile next;
 	};
 
 	unsafe struct XYZ
