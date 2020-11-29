@@ -4,6 +4,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using uint32 = System.UInt32;
 
+#pragma warning disable CS0649
+
 namespace MMapToJson
 {
     unsafe struct MMTile
@@ -42,8 +44,15 @@ namespace MMapToJson
 		public float walkableHeight;
 		public float walkableRadius;
 		public float walkableClimb;
-		public fixed float bmin[3];
-		public fixed float bmax[3];
+		public XYZ bmin;
+		public XYZ bmax;
 		public float bvQuantFactor;
 	};
+
+	unsafe struct XYZ
+    {
+		public float x;
+		public float y;
+		public float z;
+    }
 }
