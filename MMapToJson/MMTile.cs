@@ -8,7 +8,8 @@ namespace MMapToJson
 {
     unsafe struct MMTile
     {
-        public MmapTileHeader Header;
+        public MmapTileHeader MmapTileHeader;
+        public dtMeshHeader dtMeshHeader;
     }
 
     unsafe struct MmapTileHeader
@@ -20,4 +21,29 @@ namespace MMapToJson
         public char usesLiquids;
         fixed char padding[3];
     }
+
+    unsafe struct dtMeshHeader
+	{
+		public int magic;
+		public int version;
+		public int x;
+		public int y;
+		public int layer;
+		public uint userId;
+		public int polyCount;
+		public int vertCount;
+		public int maxLinkCount;
+		public int detailMeshCount;
+		public int detailVertCount;
+		public int detailTriCount;
+		public int bvNodeCount;
+		public int offMeshConCount;
+		public int offMeshBase;
+		public float walkableHeight;
+		public float walkableRadius;
+		public float walkableClimb;
+		public fixed float bmin[3];
+		public fixed float bmax[3];
+		public float bvQuantFactor;
+	};
 }
