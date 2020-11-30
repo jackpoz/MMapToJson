@@ -56,7 +56,7 @@ namespace MMapToJson
 		//public uint salt;
 		//public uint linksFreeList;
 		//public dtMeshHeader header;
-		//public dtPoly[] polys;
+		public dtPoly[] polys;
 		public XYZ[] verts;
 		//public dtLink[] links;
 		//public dtPolyDetail* detailMeshes;
@@ -70,12 +70,32 @@ namespace MMapToJson
 		//public dtMeshTile next;
 	};
 
+	unsafe struct dtPoly
+	{
+		public uint firstLink;
+		public PolygonVertices verts;
+		public PolygonVertices neis;
+		public ushort flags;
+		public byte vertCount;
+		public byte areaAndtype;
+	}
+
 	unsafe struct XYZ
     {
 		public float x;
 		public float y;
 		public float z;
     }
+
+	unsafe struct PolygonVertices
+    {
+		public ushort v1;
+		public ushort v2;
+		public ushort v3;
+		public ushort v4;
+		public ushort v5;
+		public ushort v6;
+	}
 
 	struct CustomProperties
     {
