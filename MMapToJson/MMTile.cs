@@ -53,20 +53,20 @@ namespace MMapToJson
 
 	unsafe struct dtMeshTile
 	{
-		public uint salt;
-		public uint linksFreeList;
+		//public uint salt;
+		//public uint linksFreeList;
 		//public dtMeshHeader header;
 		//public dtPoly[] polys;
-		public float[] verts;
+		public XYZ[] verts;
 		//public dtLink[] links;
 		//public dtPolyDetail* detailMeshes;
 		public float[] detailVerts;
 		public byte[] detailTris;
 		//public dtBVNode* bvTree;
 		//public dtOffMeshConnection* offMeshCons;
-		public byte[] data;
-		public int dataSize;
-		public int flags;
+		//public byte[] data;
+		//public int dataSize;
+		//public int flags;
 		//public dtMeshTile next;
 	};
 

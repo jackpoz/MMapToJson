@@ -47,7 +47,8 @@ namespace MMapToJson.Json
             {
                 IncludeFields = true,
                 WriteIndented = true,
-                MaxDepth = int.MaxValue
+                MaxDepth = int.MaxValue,
+                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals
             });
             File.WriteAllText(DestinationPath, json);
         }

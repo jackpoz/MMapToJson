@@ -22,7 +22,7 @@ namespace MMapToJson
                     IntPtr startPtr = dataManagedPtr;
                     tile.MmapTileHeader = ReadAndAdvance<MmapTileHeader>(ref dataManagedPtr);
                     tile.dtMeshHeader = ReadAndAdvance<dtMeshHeader>(ref dataManagedPtr);
-                    tile.dtMeshTile.verts = ReadAndAdvance<float>(ref dataManagedPtr, tile.dtMeshHeader.vertCount);
+                    tile.dtMeshTile.verts = ReadAndAdvance<XYZ>(ref dataManagedPtr, tile.dtMeshHeader.vertCount);
                     //tile->polys = dtGetThenAdvanceBufferPointer<dtPoly>(d, polysSize);
                     //tile->links = dtGetThenAdvanceBufferPointer<dtLink>(d, linksSize);
                     //tile->detailMeshes = dtGetThenAdvanceBufferPointer<dtPolyDetail>(d, detailMeshesSize);
