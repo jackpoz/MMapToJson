@@ -17,7 +17,9 @@ namespace MMapToJson
                 fixed (byte* dataPtr = data)
                 {
                     var tile = new MMTile();
+                    tile.CustomProperties.TotalBytes = data.Length;
                     IntPtr dataManagedPtr = (IntPtr)dataPtr;
+                    IntPtr startPtr = dataManagedPtr;
                     tile.MmapTileHeader = ReadAndAdvance<MmapTileHeader>(ref dataManagedPtr);
                     tile.dtMeshHeader = ReadAndAdvance<dtMeshHeader>(ref dataManagedPtr);
                     tile.dtMeshTile.verts = ReadAndAdvance<float>(ref dataManagedPtr, tile.dtMeshHeader.vertCount);
@@ -28,6 +30,9 @@ namespace MMapToJson
                     //tile->detailTris = dtGetThenAdvanceBufferPointer < unsigned char> (d, detailTrisSize);
                     //tile->bvTree = dtGetThenAdvanceBufferPointer<dtBVNode>(d, bvtreeSize);
                     //tile->offMeshCons = dtGetThenAdvanceBufferPointer<dtOffMeshConnection>(d, offMeshLinksSize);
+
+                    tile.CustomProperties.ReadBytes = (int)(dataManagedPtr.ToInt64() - startPtr.ToInt64());
+                    tile.CustomProperties.UnreadBytes = tile.CustomProperties.TotalBytes - tile.CustomProperties.ReadBytes;
                     return tile;
                 }
             }

@@ -13,6 +13,7 @@ namespace MMapToJson
         public MmapTileHeader MmapTileHeader;
         public dtMeshHeader dtMeshHeader;
 		public dtMeshTile dtMeshTile;
+		public CustomProperties CustomProperties;
 	}
 
     unsafe struct MmapTileHeader
@@ -74,5 +75,12 @@ namespace MMapToJson
 		public float x;
 		public float y;
 		public float z;
+    }
+
+	struct CustomProperties
+    {
+		public int TotalBytes;
+		public int ReadBytes;
+		public int UnreadBytes;
     }
 }
