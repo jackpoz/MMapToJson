@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 using uint32 = System.UInt32;
+using dtPolyRef = System.UInt64;
 
 #pragma warning disable CS0649
 
@@ -58,10 +59,10 @@ namespace MMapToJson
 		//public dtMeshHeader header;
 		public dtPoly[] polys;
 		public XYZ[] verts;
-		//public dtLink[] links;
-		//public dtPolyDetail* detailMeshes;
-		public float[] detailVerts;
-		public byte[] detailTris;
+		public dtLink[] links;
+		public dtPolyDetail[] detailMeshes;
+		public XYZ[] detailVerts;
+		public DetailTri[] detailTris;
 		//public dtBVNode* bvTree;
 		//public dtOffMeshConnection* offMeshCons;
 		//public byte[] data;
@@ -80,6 +81,24 @@ namespace MMapToJson
 		public byte areaAndtype;
 	}
 
+	unsafe struct dtLink
+	{
+		public dtPolyRef @ref;
+		public uint next;
+		public byte edge;
+		public byte side;
+		public byte bmin;
+		public byte bmax;
+	};
+
+	struct dtPolyDetail
+	{
+		public uint vertBase;
+		public uint triBase;
+		public byte vertCount;
+		public byte triCount;
+	};
+
 	unsafe struct XYZ
     {
 		public float x;
@@ -96,6 +115,14 @@ namespace MMapToJson
 		public ushort v5;
 		public ushort v6;
 	}
+
+	unsafe struct DetailTri
+    {
+		public byte vertA;
+		public byte vertB;
+		public byte vertC;
+		public byte triFlags;
+    }
 
 	struct CustomProperties
     {

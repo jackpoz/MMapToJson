@@ -24,10 +24,10 @@ namespace MMapToJson
                     tile.dtMeshHeader = ReadAndAdvance<dtMeshHeader>(ref dataManagedPtr);
                     tile.dtMeshTile.verts = ReadAndAdvance<XYZ>(ref dataManagedPtr, tile.dtMeshHeader.vertCount);
                     tile.dtMeshTile.polys = ReadAndAdvance<dtPoly>(ref dataManagedPtr, tile.dtMeshHeader.polyCount);
-                    //tile->links = dtGetThenAdvanceBufferPointer<dtLink>(d, linksSize);
-                    //tile->detailMeshes = dtGetThenAdvanceBufferPointer<dtPolyDetail>(d, detailMeshesSize);
-                    //tile->detailVerts = dtGetThenAdvanceBufferPointer<float>(d, detailVertsSize);
-                    //tile->detailTris = dtGetThenAdvanceBufferPointer < unsigned char> (d, detailTrisSize);
+                    tile.dtMeshTile.links = ReadAndAdvance<dtLink>(ref dataManagedPtr, tile.dtMeshHeader.maxLinkCount);
+                    tile.dtMeshTile.detailMeshes = ReadAndAdvance<dtPolyDetail>(ref dataManagedPtr, tile.dtMeshHeader.detailMeshCount);
+                    tile.dtMeshTile.detailVerts = ReadAndAdvance<XYZ>(ref dataManagedPtr, tile.dtMeshHeader.detailVertCount);
+                    tile.dtMeshTile.detailTris = ReadAndAdvance<DetailTri>(ref dataManagedPtr, tile.dtMeshHeader.detailTriCount);
                     //tile->bvTree = dtGetThenAdvanceBufferPointer<dtBVNode>(d, bvtreeSize);
                     //tile->offMeshCons = dtGetThenAdvanceBufferPointer<dtOffMeshConnection>(d, offMeshLinksSize);
 
