@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using uint32 = System.UInt32;
 using dtPolyRef = System.UInt64;
+using System.Runtime.InteropServices;
 
 #pragma warning disable CS0649
 
@@ -17,14 +18,13 @@ namespace MMapToJson
 		public CustomProperties CustomProperties;
 	}
 
-    unsafe struct MmapTileHeader
+	unsafe struct MmapTileHeader
     {
         public uint32 mmapMagic;
         public uint32 dtVersion;
         public uint32 mmapVersion;
         public uint32 size;
         public byte usesLiquids;
-        fixed char padding[3];
     }
 
     unsafe struct dtMeshHeader
@@ -63,8 +63,8 @@ namespace MMapToJson
 		public dtPolyDetail[] detailMeshes;
 		public XYZ[] detailVerts;
 		public DetailTri[] detailTris;
-		//public dtBVNode* bvTree;
-		//public dtOffMeshConnection* offMeshCons;
+		public dtBVNode[] bvTree;
+		public dtOffMeshConnection[] offMeshCons;
 		//public byte[] data;
 		//public int dataSize;
 		//public int flags;
@@ -99,12 +99,36 @@ namespace MMapToJson
 		public byte triCount;
 	};
 
+	unsafe struct dtBVNode
+	{
+		public XYZ<ushort> bmin;
+		public XYZ<ushort> bmax;
+		public int i;
+	};
+
+	unsafe struct dtOffMeshConnection
+	{
+		public XYZ posA;
+		public XYZ posB;
+		public float rad;
+		public byte flags;
+		public byte side;
+		public uint userId;
+	};
+
 	unsafe struct XYZ
     {
 		public float x;
 		public float y;
 		public float z;
     }
+
+	unsafe struct XYZ<T>
+	{
+		public T x;
+		public T y;
+		public T z;
+	}
 
 	unsafe struct PolygonVertices
     {
